@@ -1,13 +1,15 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using lab18.Models;
+using Microsoft.EntityFrameworkCore;
 
-namespace lab18.Models
+namespace Data.Models
 {
-    internal class ShopContext:DbContext
+    public class ShopContext : DbContext
     {
-        public DbSet<Eticheta>  Etichete{ get; set; }
+        public DbSet<Eticheta> Etichete { get; set; }
         public DbSet<Categorie> Categorii { get; set; }
         public DbSet<Produs> Produse { get; set; }
-        public DbSet<Producator> Producatori{ get; set; }
+        public DbSet<Producator> Producatori { get; set; }
+        public DbSet<ProdusElectronic> ProduseElectronice { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

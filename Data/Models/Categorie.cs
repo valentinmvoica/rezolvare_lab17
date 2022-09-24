@@ -1,6 +1,6 @@
 ﻿namespace lab18.Models
 {
-    internal class Categorie
+    public class Categorie
     {
         public int Id { get; set; }
         public string Nume { get; set; }

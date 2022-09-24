@@ -1,21 +1,13 @@
 ﻿// See https://aka.ms/new-console-template for more information
+using Data.Models;
 using lab18;
 using lab18.Models;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+
+ResetDb();
 
 
-//using var ctx = new ShopContext();
-//var alm = ctx.Categorii.FirstOrDefault();
-//ctx.Categorii.Remove(alm);
-//ctx.SaveChanges();
-////var prod1 = ResetDb();
 
-////var prod = DataAccessLayer.Instance.AddProdus("carnat de plescoi", 5, 1, 1);
-////var nres = DataAccessLayer.Instance.GetTotalStockValueForProducer(1);
-////Console.Clear();
-
-////var pretFianl = DataAccessLayer.Instance.ValoareCatProd(1, 1);
-
-////Console.WriteLine(nres);
 static Producator  ResetDb()
 {
     using var ctx = new ShopContext();

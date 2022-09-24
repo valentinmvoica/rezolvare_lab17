@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace lab18.Models
 {
-    internal class Produs
+    public class Produs
     {
         public int Id { get; set; }
         public string Nume { get; set; }
@@ -18,7 +18,7 @@ namespace lab18.Models
         public Producator Producator { get; set; }
 
 
-        public int CategorieId { get; set; }
+        public int? CategorieId { get; set; }
         public Categorie Categorie { get; set; }
 
         public Eticheta Eticheta { get; set; }

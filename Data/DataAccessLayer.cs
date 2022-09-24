@@ -1,16 +1,11 @@
-﻿using lab18.Exceptions;
+﻿using Data.Models;
+using lab18.Exceptions;
 using lab18.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Query.Internal;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace lab18
 {
-    internal class DataAccessLayer
+    public class DataAccessLayer
     {
         private static DataAccessLayer instance = null;
         public static DataAccessLayer Instance
@@ -92,7 +87,9 @@ namespace lab18
                 Nume = Nume,
                 Stoc = stoc,
                 ProducatorId = idProducator,
-                CategorieId = idCategorie
+                CategorieId = idCategorie,
+                Eticheta = ctx.Etichete.First(e => e.Id == 1)
+
             };
 
             ctx.Add(produs);
@@ -118,7 +115,35 @@ namespace lab18
             return ctx.Produse
                             .Where(p => p.CategorieId == idCategorie && p.ProducatorId == idProducator)
                             .Sum(p => p.Stoc * p.Eticheta.Pret);
-
         }
+        public void StergeCategorie(int idCategorie)
+        {
+            using var ctx = new ShopContext();
+
+            if (!ctx.Categorii.Any(c => c.Id == idCategorie))
+            {
+                throw new NotFoundException($"Categoria {idCategorie} nu exista");
+            }
+
+            var categoria = ctx.Categorii.Include(c=>c.Produse).First(c=>c.Id == idCategorie);
+
+            categoria.Produse.ForEach(p => p.CategorieId = null);
+
+            ctx.Categorii.Remove(categoria);
+
+            ctx.SaveChanges();
+        }
+
+        public void StergeProdus(int idProus)
+        {
+            using var ctx = new ShopContext();
+
+            var produs = ctx.Produse.Include(p=>p.Eticheta).First(p => p.Id == idProus);
+
+            produs.Eticheta.ProdusId = null;
+            ctx.Remove(produs);
+            ctx.SaveChanges();
+        }
+
     }
 }

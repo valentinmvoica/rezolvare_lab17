@@ -1,6 +1,6 @@
 ﻿namespace lab18.Models
 {
-    internal class Producator
+    public class Producator
     {
         public int Id { get; set; }
         public string Nume  { get; set; }
